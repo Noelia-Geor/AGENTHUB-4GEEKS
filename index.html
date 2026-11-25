@@ -1,1 +1,957 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgentHub Admin</title>
 
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class"
+    };
+  </script>
+</head>
+
+<body class="min-h-full bg-slate-100 text-slate-900 transition-colors dark:bg-slate-950 dark:text-slate-100">
+
+  <div class="min-h-screen lg:flex">
+
+    <!-- SIDEBAR -->
+    <aside
+      id="sidebar"
+      class="border-b border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 lg:fixed lg:inset-y-0 lg:left-0 lg:w-64 lg:border-b-0 lg:border-r"
+    >
+      <div class="flex h-16 items-center justify-between px-6">
+        <div>
+          <p class="text-xl font-bold text-indigo-600 dark:text-indigo-400">AgentHub</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Admin Panel</p>
+        </div>
+      </div>
+
+      <nav class="space-y-1 px-3 pb-4">
+        <button
+          data-section="dashboard"
+          class="nav-link flex w-full items-center gap-3 rounded-xl bg-indigo-50 px-4 py-3 text-left font-medium text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300"
+        >
+          <span>📊</span>
+          Dashboard
+        </button>
+
+        <button
+          data-section="users"
+          class="nav-link flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+        >
+          <span>👥</span>
+          Gestión de usuarios
+        </button>
+
+        <button
+          data-section="agents"
+          class="nav-link flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+        >
+          <span>🤖</span>
+          Gestión de agentes
+        </button>
+
+        <button
+          data-section="skills"
+          class="nav-link flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+        >
+          <span>⚡</span>
+          Skills
+        </button>
+
+        <button
+          data-section="contracts"
+          class="nav-link flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+        >
+          <span>📄</span>
+          Contrataciones
+        </button>
+
+        <button
+          data-section="errors"
+          class="nav-link flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+        >
+          <span>⚠️</span>
+          Log de errores
+        </button>
+      </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="min-h-screen flex-1 lg:ml-64">
+
+      <!-- TOP BAR -->
+      <header
+        class="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white/95 px-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/95 md:px-8"
+      >
+        <div>
+          <h1 id="pageTitle" class="text-lg font-semibold md:text-xl">Dashboard</h1>
+          <p class="hidden text-sm text-slate-500 dark:text-slate-400 sm:block">
+            Administración general de AgentHub
+          </p>
+        </div>
+
+        <button
+          id="themeToggle"
+          class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700"
+        >
+          🌙 Modo oscuro
+        </button>
+      </header>
+
+      <div class="p-4 md:p-8">
+
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="app-section space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold">Resumen general</h2>
+            <p class="mt-1 text-slate-500 dark:text-slate-400">
+              Estado actual de la plataforma.
+            </p>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+
+            <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex items-center justify-between">
+                <span class="text-2xl">💰</span>
+                <span class="text-xs font-medium text-emerald-600">Este mes</span>
+              </div>
+              <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">Ingresos totales</p>
+              <p class="mt-1 text-3xl font-bold">48.920 €</p>
+            </article>
+
+            <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex items-center justify-between">
+                <span class="text-2xl">🏷️</span>
+                <span class="text-xs font-medium text-rose-600">Descuentos</span>
+              </div>
+              <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">Pérdida por descuentos</p>
+              <p class="mt-1 text-3xl font-bold">2.430 €</p>
+            </article>
+
+            <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex items-center justify-between">
+                <span class="text-2xl">🤖</span>
+                <span class="text-xs font-medium text-emerald-600">Operativos</span>
+              </div>
+              <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">Agentes activos</p>
+              <p class="mt-1 text-3xl font-bold">127</p>
+            </article>
+
+            <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex items-center justify-between">
+                <span class="text-2xl">🚨</span>
+                <span class="text-xs font-medium text-rose-600">Revisión</span>
+              </div>
+              <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">Agentes fallando</p>
+              <p class="mt-1 text-3xl font-bold">6</p>
+            </article>
+          </div>
+
+          <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="font-semibold">Actividad semanal</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400">
+                  Ejecuciones de agentes durante los últimos 7 días
+                </p>
+              </div>
+              <span class="rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
+                Placeholder
+              </span>
+            </div>
+
+            <div class="mt-8 flex h-64 items-end gap-3 rounded-xl bg-slate-50 p-5 dark:bg-slate-950">
+              <div class="h-24 flex-1 rounded-t-lg bg-indigo-300 dark:bg-indigo-800"></div>
+              <div class="h-36 flex-1 rounded-t-lg bg-indigo-400 dark:bg-indigo-700"></div>
+              <div class="h-28 flex-1 rounded-t-lg bg-indigo-300 dark:bg-indigo-800"></div>
+              <div class="h-48 flex-1 rounded-t-lg bg-indigo-500 dark:bg-indigo-600"></div>
+              <div class="h-40 flex-1 rounded-t-lg bg-indigo-400 dark:bg-indigo-700"></div>
+              <div class="h-52 flex-1 rounded-t-lg bg-indigo-600 dark:bg-indigo-500"></div>
+              <div class="h-44 flex-1 rounded-t-lg bg-indigo-500 dark:bg-indigo-600"></div>
+            </div>
+          </article>
+        </section>
+
+        <!-- USERS -->
+        <section id="users" class="app-section hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold">Gestión de usuarios</h2>
+            <p class="mt-1 text-slate-500 dark:text-slate-400">
+              Usuarios registrados en la plataforma.
+            </p>
+          </div>
+
+          <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <table class="min-w-full text-sm">
+              <thead class="bg-slate-50 text-left text-slate-500 dark:bg-slate-800 dark:text-slate-400">
+                <tr>
+                  <th class="px-5 py-4">Nombre</th>
+                  <th class="px-5 py-4">Email</th>
+                  <th class="px-5 py-4">Plan</th>
+                  <th class="px-5 py-4">Estado</th>
+                  <th class="px-5 py-4 text-right">Acciones</th>
+                </tr>
+              </thead>
+
+              <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+
+                <tr>
+                  <td class="px-5 py-4 font-medium">Laura Sánchez</td>
+                  <td class="px-5 py-4">laura@acme.com</td>
+                  <td class="px-5 py-4">Business</td>
+                  <td class="px-5 py-4">
+                    <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">Activo</span>
+                  </td>
+                  <td class="relative px-5 py-4 text-right">
+                    <button class="dropdown-button rounded-lg px-3 py-1 hover:bg-slate-100 dark:hover:bg-slate-800">⋮</button>
+                    <div class="dropdown-menu absolute right-5 top-12 z-20 hidden w-36 rounded-xl border border-slate-200 bg-white p-1 text-left shadow-lg dark:border-slate-700 dark:bg-slate-800">
+                      <button
+                        class="detail-button w-full rounded-lg px-3 py-2 text-left hover:bg-slate-100 dark:hover:bg-slate-700"
+                        data-title="Laura Sánchez"
+                        data-content="Email: laura@acme.com|Plan: Business|Estado: Activo|Empresa: Acme Corp|Registro: 12/05/2026"
+                      >
+                        Ver detalle
+                      </button>
+                      <button class="w-full rounded-lg px-3 py-2 text-left text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950">
+                        Eliminar
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="px-5 py-4 font-medium">Daniel Ruiz</td>
+                  <td class="px-5 py-4">daniel@northstar.io</td>
+                  <td class="px-5 py-4">Pro</td>
+                  <td class="px-5 py-4">
+                    <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">Activo</span>
+                  </td>
+                  <td class="relative px-5 py-4 text-right">
+                    <button class="dropdown-button rounded-lg px-3 py-1 hover:bg-slate-100 dark:hover:bg-slate-800">⋮</button>
+                    <div class="dropdown-menu absolute right-5 top-12 z-20 hidden w-36 rounded-xl border border-slate-200 bg-white p-1 text-left shadow-lg dark:border-slate-700 dark:bg-slate-800">
+                      <button
+                        class="detail-button w-full rounded-lg px-3 py-2 text-left hover:bg-slate-100 dark:hover:bg-slate-700"
+                        data-title="Daniel Ruiz"
+                        data-content="Email: daniel@northstar.io|Plan: Pro|Estado: Activo|Empresa: Northstar Labs|Registro: 18/04/2026"
+                      >
+                        Ver detalle
+                      </button>
+                      <button class="w-full rounded-lg px-3 py-2 text-left text-rose-600">Eliminar</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="px-5 py-4 font-medium">Marta López</td>
+                  <td class="px-5 py-4">marta@bluepeak.es</td>
+                  <td class="px-5 py-4">Starter</td>
+                  <td class="px-5 py-4">
+                    <span class="rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-700 dark:bg-amber-950 dark:text-amber-300">Pendiente</span>
+                  </td>
+                  <td class="relative px-5 py-4 text-right">
+                    <button class="dropdown-button rounded-lg px-3 py-1">⋮</button>
+                    <div class="dropdown-menu absolute right-5 top-12 z-20 hidden w-36 rounded-xl border bg-white p-1 text-left shadow-lg dark:border-slate-700 dark:bg-slate-800">
+                      <button
+                        class="detail-button w-full rounded-lg px-3 py-2 text-left"
+                        data-title="Marta López"
+                        data-content="Email: marta@bluepeak.es|Plan: Starter|Estado: Pendiente|Empresa: BluePeak|Registro: 01/11/2026"
+                      >
+                        Ver detalle
+                      </button>
+                      <button class="w-full rounded-lg px-3 py-2 text-left text-rose-600">Eliminar</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="px-5 py-4 font-medium">Carlos Vega</td>
+                  <td class="px-5 py-4">carlos@vertex.com</td>
+                  <td class="px-5 py-4">Business</td>
+                  <td class="px-5 py-4">
+                    <span class="rounded-full bg-slate-200 px-3 py-1 text-xs font-medium text-slate-700 dark:bg-slate-700 dark:text-slate-200">Inactivo</span>
+                  </td>
+                  <td class="relative px-5 py-4 text-right">
+                    <button class="dropdown-button rounded-lg px-3 py-1">⋮</button>
+                    <div class="dropdown-menu absolute right-5 top-12 z-20 hidden w-36 rounded-xl border bg-white p-1 text-left shadow-lg dark:border-slate-700 dark:bg-slate-800">
+                      <button
+                        class="detail-button w-full rounded-lg px-3 py-2 text-left"
+                        data-title="Carlos Vega"
+                        data-content="Email: carlos@vertex.com|Plan: Business|Estado: Inactivo|Empresa: Vertex Solutions|Registro: 21/03/2026"
+                      >
+                        Ver detalle
+                      </button>
+                      <button class="w-full rounded-lg px-3 py-2 text-left text-rose-600">Eliminar</button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="px-5 py-4 font-medium">Andrea Martín</td>
+                  <td class="px-5 py-4">andrea@novacore.ai</td>
+                  <td class="px-5 py-4">Pro</td>
+                  <td class="px-5 py-4">
+                    <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">Activo</span>
+                  </td>
+                  <td class="relative px-5 py-4 text-right">
+                    <button class="dropdown-button rounded-lg px-3 py-1">⋮</button>
+                    <div class="dropdown-menu absolute right-5 top-12 z-20 hidden w-36 rounded-xl border bg-white p-1 text-left shadow-lg dark:border-slate-700 dark:bg-slate-800">
+                      <button
+                        class="detail-button w-full rounded-lg px-3 py-2 text-left"
+                        data-title="Andrea Martín"
+                        data-content="Email: andrea@novacore.ai|Plan: Pro|Estado: Activo|Empresa: NovaCore|Registro: 09/09/2026"
+                      >
+                        Ver detalle
+                      </button>
+                      <button class="w-full rounded-lg px-3 py-2 text-left text-rose-600">Eliminar</button>
+                    </div>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- AGENTS -->
+        <section id="agents" class="app-section hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold">Gestión de agentes</h2>
+            <p class="mt-1 text-slate-500 dark:text-slate-400">
+              Agentes IA registrados en AgentHub.
+            </p>
+          </div>
+
+          <div class="grid gap-4">
+
+            <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex flex-col justify-between gap-4 md:flex-row md:items-center">
+                <div>
+                  <div class="flex items-center gap-3">
+                    <h3 class="text-lg font-semibold">Atlas</h3>
+                    <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">Activo</span>
+                  </div>
+                  <p class="mt-1 text-sm text-slate-500">Propietario: Acme Corp</p>
+                </div>
+
+                <div class="flex gap-2">
+                  <button class="skills-toggle rounded-xl border border-slate-200 px-4 py-2 text-sm dark:border-slate-700">
+                    Ver skills
+                  </button>
+
+                  <div class="relative">
+                    <button class="dropdown-button rounded-xl border border-slate-200 px-4 py-2 dark:border-slate-700">⋮</button>
+                    <div class="dropdown-menu absolute right-0 top-12 z-20 hidden w-40 rounded-xl border bg-white p-1 shadow-lg dark:border-slate-700 dark:bg-slate-800">
+                      <button
+                        class="configure-button w-full rounded-lg px-3 py-2 text-left"
+                        data-agent="Atlas"
+                        data-prompt="Eres Atlas, un agente especializado en analizar documentos empresariales, navegar por fuentes verificadas y resumir información para equipos de negocio."
+                      >
+                        Configurar
+                      </button>
+                      <button class="w-full rounded-lg px-3 py-2 text-left text-rose-600">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="skills-panel mt-4 hidden overflow-hidden rounded-xl bg-slate-50 p-4 dark:bg-slate-950">
+                <div class="flex flex-wrap gap-2">
+                  <span class="rounded-full bg-indigo-100 px-3 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Navegación web</span>
+                  <span class="rounded-full bg-indigo-100 px-3 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Lectura de documentos</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex flex-col justify-between gap-4 md:flex-row md:items-center">
+                <div>
+                  <div class="flex items-center gap-3">
+                    <h3 class="text-lg font-semibold">Nova</h3>
+                    <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">Activo</span>
+                  </div>
+                  <p class="mt-1 text-sm text-slate-500">Propietario: Northstar Labs</p>
+                </div>
+
+                <div class="flex gap-2">
+                  <button class="skills-toggle rounded-xl border border-slate-200 px-4 py-2 text-sm dark:border-slate-700">Ver skills</button>
+
+                  <div class="relative">
+                    <button class="dropdown-button rounded-xl border border-slate-200 px-4 py-2 dark:border-slate-700">⋮</button>
+                    <div class="dropdown-menu absolute right-0 top-12 z-20 hidden w-40 rounded-xl border bg-white p-1 shadow-lg dark:border-slate-700 dark:bg-slate-800">
+                      <button
+                        class="configure-button w-full rounded-lg px-3 py-2 text-left"
+                        data-agent="Nova"
+                        data-prompt="Eres Nova, una agente especializada en coordinación de calendarios, organización operativa y seguimiento de tareas empresariales."
+                      >
+                        Configurar
+                      </button>
+                      <button class="w-full rounded-lg px-3 py-2 text-left text-rose-600">Eliminar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="skills-panel mt-4 hidden rounded-xl bg-slate-50 p-4 dark:bg-slate-950">
+                <div class="flex flex-wrap gap-2">
+                  <span class="rounded-full bg-indigo-100 px-3 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Gestión de calendario</span>
+                  <span class="rounded-full bg-indigo-100 px-3 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Análisis de datos</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex flex-col justify-between gap-4 md:flex-row md:items-center">
+                <div>
+                  <div class="flex items-center gap-3">
+                    <h3 class="text-lg font-semibold">Orion</h3>
+                    <span class="rounded-full bg-rose-100 px-3 py-1 text-xs text-rose-700 dark:bg-rose-950 dark:text-rose-300">Fallando</span>
+                  </div>
+                  <p class="mt-1 text-sm text-slate-500">Propietario: BluePeak</p>
+                </div>
+
+                <button class="skills-toggle rounded-xl border border-slate-200 px-4 py-2 text-sm dark:border-slate-700">
+                  Ver skills
+                </button>
+              </div>
+
+              <div class="skills-panel mt-4 hidden rounded-xl bg-slate-50 p-4 dark:bg-slate-950">
+                <span class="rounded-full bg-indigo-100 px-3 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Navegación web</span>
+              </div>
+            </article>
+
+            <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex flex-col justify-between gap-4 md:flex-row md:items-center">
+                <div>
+                  <div class="flex items-center gap-3">
+                    <h3 class="text-lg font-semibold">Luna</h3>
+                    <span class="rounded-full bg-slate-200 px-3 py-1 text-xs text-slate-700 dark:bg-slate-700 dark:text-slate-200">Inactivo</span>
+                  </div>
+                  <p class="mt-1 text-sm text-slate-500">Propietario: Vertex Solutions</p>
+                </div>
+
+                <button class="skills-toggle rounded-xl border border-slate-200 px-4 py-2 text-sm dark:border-slate-700">
+                  Ver skills
+                </button>
+              </div>
+
+              <div class="skills-panel mt-4 hidden rounded-xl bg-slate-50 p-4 dark:bg-slate-950">
+                <span class="rounded-full bg-indigo-100 px-3 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Lectura de documentos</span>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills" class="app-section hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold">Skills</h2>
+            <p class="mt-1 text-slate-500 dark:text-slate-400">
+              Capacidades disponibles para ampliar lo que puede hacer cada agente.
+            </p>
+          </div>
+
+          <div class="rounded-2xl border border-indigo-200 bg-indigo-50 p-5 text-sm text-indigo-900 dark:border-indigo-900 dark:bg-indigo-950 dark:text-indigo-200">
+            Una <strong>skill</strong> es una capacidad específica que puede habilitarse en un agente, como navegar por la web, leer documentos, analizar datos o gestionar calendarios.
+          </div>
+
+          <div class="grid gap-4 md:grid-cols-2">
+
+            <article class="rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex justify-between">
+                <div>
+                  <h3 class="font-semibold">Navegación web</h3>
+                  <p class="mt-2 text-sm text-slate-500">Permite investigar información en páginas web.</p>
+                  <p class="mt-3 text-sm font-medium">32 agentes habilitados</p>
+                </div>
+                <button class="detail-button h-fit rounded-lg px-3 py-1" data-title="Navegación web" data-content="Tipo: Skill|Agentes habilitados: 32|Estado: Disponible">⋮</button>
+              </div>
+            </article>
+
+            <article class="rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <h3 class="font-semibold">Lectura de documentos</h3>
+              <p class="mt-2 text-sm text-slate-500">Extrae y analiza información de documentos.</p>
+              <p class="mt-3 text-sm font-medium">47 agentes habilitados</p>
+            </article>
+
+            <article class="rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <h3 class="font-semibold">Gestión de calendario</h3>
+              <p class="mt-2 text-sm text-slate-500">Permite consultar y organizar eventos.</p>
+              <p class="mt-3 text-sm font-medium">21 agentes habilitados</p>
+            </article>
+
+            <article class="rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <h3 class="font-semibold">Análisis de datos</h3>
+              <p class="mt-2 text-sm text-slate-500">Procesa métricas y genera conclusiones.</p>
+              <p class="mt-3 text-sm font-medium">38 agentes habilitados</p>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- CONTRACTS -->
+        <section id="contracts" class="app-section hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold">Contrataciones de agentes</h2>
+            <p class="mt-1 text-slate-500">Contratos activos y finalizados.</p>
+          </div>
+
+          <div class="overflow-x-auto rounded-2xl border bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <table class="min-w-full text-sm">
+              <thead class="bg-slate-50 text-left dark:bg-slate-800">
+                <tr>
+                  <th class="px-5 py-4">Cliente</th>
+                  <th class="px-5 py-4">Agente</th>
+                  <th class="px-5 py-4">Skills</th>
+                  <th class="px-5 py-4">Inicio</th>
+                  <th class="px-5 py-4">Fin</th>
+                  <th class="px-5 py-4">Pagado</th>
+                  <th class="px-5 py-4"></th>
+                </tr>
+              </thead>
+
+              <tbody class="divide-y dark:divide-slate-800">
+                <tr>
+                  <td class="px-5 py-4">Acme Corp</td>
+                  <td class="px-5 py-4">Atlas</td>
+                  <td class="px-5 py-4">Web, Documentos</td>
+                  <td class="px-5 py-4">01/10/2026</td>
+                  <td class="px-5 py-4">31/12/2026</td>
+                  <td class="px-5 py-4 font-medium">1.890 €</td>
+                  <td class="px-5 py-4">
+                    <button
+                      class="detail-button rounded-lg px-3 py-1"
+                      data-title="Contrato Acme Corp"
+                      data-content="Agente: Atlas|Periodo: 01/10/2026 - 31/12/2026|Navegación web: 190 €|Lectura de documentos: 240 €|Importe total: 1.890 €"
+                    >
+                      ⋮
+                    </button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="px-5 py-4">Northstar Labs</td>
+                  <td class="px-5 py-4">Nova</td>
+                  <td class="px-5 py-4">Calendario, Datos</td>
+                  <td class="px-5 py-4">15/09/2026</td>
+                  <td class="px-5 py-4">15/12/2026</td>
+                  <td class="px-5 py-4 font-medium">2.150 €</td>
+                  <td class="px-5 py-4">
+                    <button
+                      class="detail-button rounded-lg px-3 py-1"
+                      data-title="Contrato Northstar Labs"
+                      data-content="Agente: Nova|Gestión de calendario: 210 €|Análisis de datos: 290 €|Importe total: 2.150 €"
+                    >
+                      ⋮
+                    </button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="px-5 py-4">BluePeak</td>
+                  <td class="px-5 py-4">Orion</td>
+                  <td class="px-5 py-4">Web</td>
+                  <td class="px-5 py-4">01/08/2026</td>
+                  <td class="px-5 py-4">01/11/2026</td>
+                  <td class="px-5 py-4 font-medium">1.240 €</td>
+                  <td class="px-5 py-4">
+                    <button
+                      class="detail-button rounded-lg px-3 py-1"
+                      data-title="Contrato BluePeak"
+                      data-content="Agente: Orion|Navegación web: 190 €|Importe total: 1.240 €"
+                    >
+                      ⋮
+                    </button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="px-5 py-4">Vertex Solutions</td>
+                  <td class="px-5 py-4">Luna</td>
+                  <td class="px-5 py-4">Documentos</td>
+                  <td class="px-5 py-4">10/06/2026</td>
+                  <td class="px-5 py-4">10/09/2026</td>
+                  <td class="px-5 py-4 font-medium">980 €</td>
+                  <td class="px-5 py-4">
+                    <button
+                      class="detail-button rounded-lg px-3 py-1"
+                      data-title="Contrato Vertex Solutions"
+                      data-content="Agente: Luna|Lectura de documentos: 240 €|Importe total: 980 €"
+                    >
+                      ⋮
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ERRORS -->
+        <section id="errors" class="app-section hidden space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold">Log de errores</h2>
+            <p class="mt-1 text-slate-500">
+              Incidencias registradas durante la ejecución de agentes.
+            </p>
+          </div>
+
+          <div class="space-y-3">
+
+            <article class="error-item flex flex-col justify-between gap-4 rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900 md:flex-row md:items-center">
+              <div>
+                <div class="flex flex-wrap items-center gap-3">
+                  <strong>Orion</strong>
+                  <span class="rounded-full bg-rose-100 px-3 py-1 text-xs text-rose-700 dark:bg-rose-950 dark:text-rose-300">Crítico</span>
+                  <span class="text-xs text-slate-400">25/11/2026 09:34</span>
+                </div>
+                <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">
+                  Error de autenticación al acceder a una fuente externa.
+                </p>
+              </div>
+
+              <div class="flex gap-2">
+                <button
+                  class="detail-button rounded-xl border px-4 py-2 text-sm dark:border-slate-700"
+                  data-title="Error de Orion"
+                  data-content="Tipo: AuthenticationError|Código: AUTH-401|Traza: ExternalProvider -> authenticate() -> token rejected|Estado: Sin resolver"
+                >
+                  Ver detalle
+                </button>
+
+                <button class="resolve-button rounded-xl bg-emerald-600 px-4 py-2 text-sm text-white">
+                  Marcar como resuelto
+                </button>
+              </div>
+            </article>
+
+            <article class="error-item rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex flex-wrap items-center gap-3">
+                <strong>Atlas</strong>
+                <span class="rounded-full bg-amber-100 px-3 py-1 text-xs text-amber-700">Warning</span>
+                <span class="text-xs text-slate-400">25/11/2026 08:12</span>
+              </div>
+              <p class="mt-2 text-sm">Tiempo de respuesta superior al esperado.</p>
+            </article>
+
+            <article class="error-item rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex gap-3">
+                <strong>Nova</strong>
+                <span class="rounded-full bg-rose-100 px-3 py-1 text-xs text-rose-700">Error</span>
+              </div>
+              <p class="mt-2 text-sm">No se pudo sincronizar un calendario.</p>
+            </article>
+
+            <article class="error-item rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex gap-3">
+                <strong>Atlas</strong>
+                <span class="rounded-full bg-amber-100 px-3 py-1 text-xs text-amber-700">Warning</span>
+              </div>
+              <p class="mt-2 text-sm">Documento parcialmente ilegible.</p>
+            </article>
+
+            <article class="error-item rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex gap-3">
+                <strong>Luna</strong>
+                <span class="rounded-full bg-slate-200 px-3 py-1 text-xs text-slate-700">Info</span>
+              </div>
+              <p class="mt-2 text-sm">Ejecución cancelada por el usuario.</p>
+            </article>
+
+            <article class="error-item rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex gap-3">
+                <strong>Orion</strong>
+                <span class="rounded-full bg-rose-100 px-3 py-1 text-xs text-rose-700">Crítico</span>
+              </div>
+              <p class="mt-2 text-sm">Límite de peticiones externas alcanzado.</p>
+            </article>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL -->
+  <div
+    id="modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/60 p-4"
+  >
+    <div
+      id="modalBox"
+      class="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl dark:bg-slate-900"
+    >
+      <div class="flex items-start justify-between gap-4">
+        <h2 id="modalTitle" class="text-xl font-bold">Detalle</h2>
+
+        <button
+          id="closeModal"
+          class="rounded-lg px-3 py-1 text-xl hover:bg-slate-100 dark:hover:bg-slate-800"
+        >
+          ×
+        </button>
+      </div>
+
+      <div id="modalContent" class="mt-5 space-y-3 text-sm text-slate-600 dark:text-slate-300"></div>
+    </div>
+  </div>
+
+  <!-- CONFIG MODAL -->
+  <div
+    id="configModal"
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/60 p-4"
+  >
+    <div class="w-full max-w-xl rounded-2xl bg-white p-6 shadow-2xl dark:bg-slate-900">
+      <div class="flex justify-between">
+        <h2 id="configTitle" class="text-xl font-bold">Configurar agente</h2>
+        <button id="closeConfigModal" class="rounded-lg px-3 py-1 text-xl">×</button>
+      </div>
+
+      <label class="mt-5 block text-sm font-medium">
+        Prompt de sistema
+      </label>
+
+      <textarea
+        id="agentPrompt"
+        rows="8"
+        class="mt-2 w-full rounded-xl border border-slate-300 bg-white p-4 text-sm dark:border-slate-700 dark:bg-slate-950"
+      ></textarea>
+
+      <div class="mt-4 flex justify-end">
+        <button
+          id="savePrompt"
+          class="rounded-xl bg-indigo-600 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+        >
+          Guardar cambios
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const sections = document.querySelectorAll(".app-section");
+    const navLinks = document.querySelectorAll(".nav-link");
+    const pageTitle = document.getElementById("pageTitle");
+
+    const sectionTitles = {
+      dashboard: "Dashboard",
+      users: "Gestión de usuarios",
+      agents: "Gestión de agentes",
+      skills: "Skills",
+      contracts: "Contrataciones de agentes",
+      errors: "Log de errores"
+    };
+
+    navLinks.forEach((button) => {
+      button.addEventListener("click", () => {
+        const sectionId = button.dataset.section;
+
+        sections.forEach((section) => {
+          section.classList.add("hidden");
+        });
+
+        document.getElementById(sectionId).classList.remove("hidden");
+
+        navLinks.forEach((nav) => {
+          nav.classList.remove(
+            "bg-indigo-50",
+            "text-indigo-700",
+            "dark:bg-indigo-950",
+            "dark:text-indigo-300"
+          );
+
+          nav.classList.add(
+            "text-slate-600",
+            "dark:text-slate-300"
+          );
+        });
+
+        button.classList.remove(
+          "text-slate-600",
+          "dark:text-slate-300"
+        );
+
+        button.classList.add(
+          "bg-indigo-50",
+          "text-indigo-700",
+          "dark:bg-indigo-950",
+          "dark:text-indigo-300"
+        );
+
+        pageTitle.textContent = sectionTitles[sectionId];
+      });
+    });
+
+    // DARK MODE
+    const themeToggle = document.getElementById("themeToggle");
+
+    const savedTheme = localStorage.getItem("agenthub-theme");
+
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      themeToggle.textContent = "☀️ Modo claro";
+    }
+
+    themeToggle.addEventListener("click", () => {
+      document.documentElement.classList.toggle("dark");
+
+      const darkMode = document.documentElement.classList.contains("dark");
+
+      localStorage.setItem(
+        "agenthub-theme",
+        darkMode ? "dark" : "light"
+      );
+
+      themeToggle.textContent = darkMode
+        ? "☀️ Modo claro"
+        : "🌙 Modo oscuro";
+    });
+
+    // DROPDOWNS
+    document.querySelectorAll(".dropdown-button").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
+
+        const menu = button.nextElementSibling;
+
+        document.querySelectorAll(".dropdown-menu").forEach((dropdown) => {
+          if (dropdown !== menu) {
+            dropdown.classList.add("hidden");
+          }
+        });
+
+        menu.classList.toggle("hidden");
+      });
+    });
+
+    document.addEventListener("click", () => {
+      document.querySelectorAll(".dropdown-menu").forEach((menu) => {
+        menu.classList.add("hidden");
+      });
+    });
+
+    // SKILLS COLLAPSABLE
+    document.querySelectorAll(".skills-toggle").forEach((button) => {
+      button.addEventListener("click", () => {
+        const article = button.closest("article");
+        const panel = article.querySelector(".skills-panel");
+
+        panel.classList.toggle("hidden");
+
+        button.textContent = panel.classList.contains("hidden")
+          ? "Ver skills"
+          : "Ocultar skills";
+      });
+    });
+
+    // GENERAL MODAL
+    const modal = document.getElementById("modal");
+    const modalBox = document.getElementById("modalBox");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalContent = document.getElementById("modalContent");
+    const closeModal = document.getElementById("closeModal");
+
+    function openDetailModal(title, content) {
+      modalTitle.textContent = title;
+      modalContent.innerHTML = "";
+
+      content.split("|").forEach((line) => {
+        const paragraph = document.createElement("p");
+        paragraph.className =
+          "rounded-xl bg-slate-50 p-3 dark:bg-slate-800";
+        paragraph.textContent = line;
+        modalContent.appendChild(paragraph);
+      });
+
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function hideModal() {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    document.querySelectorAll(".detail-button").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
+
+        openDetailModal(
+          button.dataset.title || "Detalle",
+          button.dataset.content || "Información no disponible"
+        );
+      });
+    });
+
+    closeModal.addEventListener("click", hideModal);
+
+    modal.addEventListener("click", hideModal);
+
+    modalBox.addEventListener("click", (event) => {
+      event.stopPropagation();
+    });
+
+    // AGENT CONFIG MODAL
+    const configModal = document.getElementById("configModal");
+    const configTitle = document.getElementById("configTitle");
+    const agentPrompt = document.getElementById("agentPrompt");
+    const closeConfigModal = document.getElementById("closeConfigModal");
+    const savePrompt = document.getElementById("savePrompt");
+
+    document.querySelectorAll(".configure-button").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
+
+        configTitle.textContent = `Configurar ${button.dataset.agent}`;
+        agentPrompt.value = button.dataset.prompt;
+
+        configModal.classList.remove("hidden");
+        configModal.classList.add("flex");
+      });
+    });
+
+    function hideConfigModal() {
+      configModal.classList.add("hidden");
+      configModal.classList.remove("flex");
+    }
+
+    closeConfigModal.addEventListener("click", hideConfigModal);
+
+    configModal.addEventListener("click", (event) => {
+      if (event.target === configModal) {
+        hideConfigModal();
+      }
+    });
+
+    savePrompt.addEventListener("click", () => {
+      hideConfigModal();
+    });
+
+    // RESOLVE ERRORS
+    document.querySelectorAll(".resolve-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        button.textContent = "✓ Resuelto";
+
+        button.classList.remove("bg-emerald-600");
+
+        button.classList.add(
+          "bg-slate-200",
+          "text-slate-700",
+          "dark:bg-slate-700",
+          "dark:text-slate-200"
+        );
+
+        button.disabled = true;
+      });
+    });
+  </script>
+
+</body>
+</html>
