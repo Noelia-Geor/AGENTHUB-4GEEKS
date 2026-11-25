@@ -9,152 +9,175 @@
 
   <script>
     tailwind.config = {
-      darkMode: "class"
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            slate: { 50: "#F8F5EC", 100: "#EEE7DC", 200: "#E2DDD2", 300: "#C6C4B9", 400: "#A4A79D", 500: "#716F67", 600: "#615F57", 700: "#55524D", 800: "#303A35", 900: "#252D29", 950: "#1B221F" },
+            indigo: { 50: "#DDE9DC", 100: "#DDE9DC", 200: "#A9C5B2", 300: "#A9C5B2", 400: "#A9C5B2", 500: "#6E9781", 600: "#527A68", 700: "#3F6655", 900: "#30483D", 950: "#273D33" },
+            emerald: { 50: "#DDE9DC", 100: "#DDE9DC", 300: "#BBD9C3", 600: "#527A68", 700: "#3F6655", 950: "#273D33" }
+          }
+        }
+      }
     };
   </script>
 </head>
 
-<body class="min-h-full bg-slate-100 text-slate-900 transition-colors dark:bg-slate-950 dark:text-slate-100">
+<body class="min-h-full bg-[#F8F5EC] font-['Trebuchet_MS',sans-serif] text-[#55524D] transition-colors dark:bg-slate-950 dark:text-slate-100">
+  <svg xmlns="http://www.w3.org/2000/svg" class="hidden" aria-hidden="true">
+    <symbol id="icon-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="icon-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 5v1"/></symbol>
+    <symbol id="icon-agent" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="13" rx="3"/><path d="M12 3v3M8 12h.01M16 12h.01M9 16h6"/></symbol>
+    <symbol id="icon-skill" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="icon-file" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v5h4M9 12h6M9 16h6"/></symbol>
+    <symbol id="icon-alert" viewBox="0 0 24 24"><path d="M12 3 2.5 20h19L12 3zM12 9v4M12 17h.01"/></symbol>
+    <symbol id="icon-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 8.5a4 4 0 1 0 0 7M7 11h7M7 13h7"/></symbol>
+    <symbol id="icon-tag" viewBox="0 0 24 24"><path d="M3 12V4h8l9 9-7 7-10-8z"/><circle cx="7.5" cy="8" r="1"/></symbol>
+  </svg>
 
   <div class="min-h-screen lg:flex">
 
     <!-- SIDEBAR -->
     <aside
       id="sidebar"
-      class="border-b border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 lg:fixed lg:inset-y-0 lg:left-0 lg:w-64 lg:border-b-0 lg:border-r"
+      class="border-b border-slate-200 bg-[#EEE7DC] dark:border-slate-800 dark:bg-slate-900 lg:fixed lg:inset-y-0 lg:left-0 lg:w-60 lg:border-b-0 lg:border-r"
     >
-      <div class="flex h-16 items-center justify-between px-6">
+      <div class="flex h-20 items-center justify-between px-6">
         <div>
-          <p class="text-xl font-bold text-indigo-600 dark:text-indigo-400">AgentHub</p>
-          <p class="text-xs text-slate-500 dark:text-slate-400">Admin Panel</p>
+          <p class="text-xl font-semibold text-slate-700 dark:text-slate-100">Agent<span class="text-indigo-600 dark:text-indigo-300">Hub</span></p>
+          <p class="mt-0.5 text-xs text-slate-500 dark:text-slate-400">AI Operations</p>
         </div>
       </div>
 
-      <nav class="space-y-1 px-3 pb-4">
+      <nav aria-label="Navegación principal" class="grid grid-cols-2 gap-1 px-3 pb-4 sm:grid-cols-3 lg:mt-8 lg:block lg:space-y-1">
         <button
           data-section="dashboard"
-          class="nav-link flex w-full items-center gap-3 rounded-xl bg-indigo-50 px-4 py-3 text-left font-medium text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300"
+          class="nav-link flex min-h-11 w-full items-center gap-3 rounded-md border-l-2 border-indigo-600 bg-indigo-50 px-3 py-2.5 text-left text-sm font-medium text-indigo-700 transition-colors dark:bg-indigo-950 dark:text-indigo-300"
         >
-          <span>📊</span>
+          <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><use href="#icon-grid"/></svg>
           Dashboard
         </button>
 
         <button
           data-section="users"
-          class="nav-link flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+          class="nav-link flex min-h-11 w-full items-center gap-3 rounded-md border-l-2 border-transparent px-3 py-2.5 text-left text-sm text-slate-600 transition-colors hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
         >
-          <span>👥</span>
+          <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><use href="#icon-users"/></svg>
           Gestión de usuarios
         </button>
 
         <button
           data-section="agents"
-          class="nav-link flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+          class="nav-link flex min-h-11 w-full items-center gap-3 rounded-md border-l-2 border-transparent px-3 py-2.5 text-left text-sm text-slate-600 transition-colors hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
         >
-          <span>🤖</span>
+          <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><use href="#icon-agent"/></svg>
           Gestión de agentes
         </button>
 
         <button
           data-section="skills"
-          class="nav-link flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+          class="nav-link flex min-h-11 w-full items-center gap-3 rounded-md border-l-2 border-transparent px-3 py-2.5 text-left text-sm text-slate-600 transition-colors hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
         >
-          <span>⚡</span>
+          <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><use href="#icon-skill"/></svg>
           Skills
         </button>
 
         <button
           data-section="contracts"
-          class="nav-link flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+          class="nav-link flex min-h-11 w-full items-center gap-3 rounded-md border-l-2 border-transparent px-3 py-2.5 text-left text-sm text-slate-600 transition-colors hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
         >
-          <span>📄</span>
+          <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><use href="#icon-file"/></svg>
           Contrataciones
         </button>
 
         <button
           data-section="errors"
-          class="nav-link flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+          class="nav-link flex min-h-11 w-full items-center gap-3 rounded-md border-l-2 border-transparent px-3 py-2.5 text-left text-sm text-slate-600 transition-colors hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
         >
-          <span>⚠️</span>
+          <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><use href="#icon-alert"/></svg>
           Log de errores
         </button>
       </nav>
     </aside>
 
     <!-- MAIN -->
-    <main class="min-h-screen flex-1 lg:ml-64">
+    <main class="min-w-0 min-h-screen flex-1 lg:ml-60">
 
       <!-- TOP BAR -->
       <header
-        class="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-slate-200 bg-white/95 px-4 backdrop-blur dark:border-slate-800 dark:bg-slate-900/95 md:px-8"
+        class="sticky top-0 z-30 flex min-h-20 items-center justify-between gap-3 border-b border-slate-200 bg-[#F8F5EC]/95 px-4 backdrop-blur dark:border-slate-800 dark:bg-slate-950/95 md:px-8"
       >
         <div>
-          <h1 id="pageTitle" class="text-lg font-semibold md:text-xl">Dashboard</h1>
-          <p class="hidden text-sm text-slate-500 dark:text-slate-400 sm:block">
+          <h1 id="pageTitle" class="text-base font-semibold md:text-lg">Dashboard</h1>
+          <p id="pageDescription" class="text-xs text-slate-500 dark:text-slate-400 sm:text-sm">
             Administración general de AgentHub
           </p>
+          <p class="mt-1 flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300 md:hidden"><span class="h-1.5 w-1.5 rounded-full bg-amber-600"></span>1 agente requiere atención</p>
         </div>
 
+        <div class="flex shrink-0 items-center gap-4">
+        <span class="hidden items-center gap-2 text-xs text-slate-600 dark:text-slate-300 md:flex"><span class="h-2 w-2 rounded-full bg-amber-600"></span>1 agente requiere atención</span>
         <button
           id="themeToggle"
-          class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700"
+          class="min-h-11 rounded-md border border-slate-200 bg-[#FFFDF8] px-3 text-sm font-medium hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700"
         >
-          🌙 Modo oscuro
+          Modo oscuro
         </button>
+        </div>
       </header>
 
-      <div class="p-4 md:p-8">
+      <div class="mx-auto max-w-[1440px] p-4 md:p-8 lg:p-10">
 
         <!-- DASHBOARD -->
         <section id="dashboard" class="app-section space-y-6">
           <div>
-            <h2 class="text-2xl font-bold">Resumen general</h2>
-            <p class="mt-1 text-slate-500 dark:text-slate-400">
-              Estado actual de la plataforma.
+            <h2 class="text-xl font-semibold">Resumen general</h2>
+            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+              Una vista del estado actual de AgentHub.
             </p>
           </div>
 
-          <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
 
-            <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <article class="rounded-lg border border-slate-200 bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900">
               <div class="flex items-center justify-between">
-                <span class="text-2xl">💰</span>
-                <span class="text-xs font-medium text-emerald-600">Este mes</span>
+                <svg class="h-5 w-5 text-indigo-600 dark:text-indigo-300" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><use href="#icon-coin"/></svg>
               </div>
               <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">Ingresos totales</p>
-              <p class="mt-1 text-3xl font-bold">48.920 €</p>
+              <p class="mt-1 text-2xl font-semibold">48.920 €</p>
+              <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">Ingresos registrados este mes</p>
             </article>
 
-            <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <article class="rounded-lg border border-slate-200 bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900">
               <div class="flex items-center justify-between">
-                <span class="text-2xl">🏷️</span>
-                <span class="text-xs font-medium text-rose-600">Descuentos</span>
+                <svg class="h-5 w-5 text-indigo-600 dark:text-indigo-300" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><use href="#icon-tag"/></svg>
               </div>
               <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">Pérdida por descuentos</p>
-              <p class="mt-1 text-3xl font-bold">2.430 €</p>
+              <p class="mt-1 text-2xl font-semibold">2.430 €</p>
+              <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">Descuentos aplicados este mes</p>
             </article>
 
-            <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <article class="rounded-lg border border-slate-200 bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900">
               <div class="flex items-center justify-between">
-                <span class="text-2xl">🤖</span>
-                <span class="text-xs font-medium text-emerald-600">Operativos</span>
+                <svg class="h-5 w-5 text-indigo-600 dark:text-indigo-300" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><use href="#icon-agent"/></svg>
               </div>
               <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">Agentes activos</p>
-              <p class="mt-1 text-3xl font-bold">127</p>
+              <p class="mt-1 text-2xl font-semibold">2</p>
+              <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">De los 4 agentes registrados</p>
             </article>
 
-            <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <article class="rounded-lg border border-slate-200 bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900">
               <div class="flex items-center justify-between">
-                <span class="text-2xl">🚨</span>
-                <span class="text-xs font-medium text-rose-600">Revisión</span>
+                <svg class="h-5 w-5 text-rose-700 dark:text-rose-300" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><use href="#icon-alert"/></svg>
               </div>
               <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">Agentes fallando</p>
-              <p class="mt-1 text-3xl font-bold">6</p>
+              <p class="mt-1 text-2xl font-semibold">1</p>
+              <p class="mt-2 text-xs text-slate-500 dark:text-slate-400">Requiere revisión</p>
             </article>
           </div>
 
-          <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <div class="flex items-center justify-between">
+          <article class="rounded-lg border border-slate-200 bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900 sm:p-6">
+            <div class="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <h3 class="font-semibold">Actividad semanal</h3>
                 <p class="text-sm text-slate-500 dark:text-slate-400">
@@ -162,18 +185,27 @@
                 </p>
               </div>
               <span class="rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
-                Placeholder
+                Últimos 7 días
               </span>
             </div>
 
-            <div class="mt-8 flex h-64 items-end gap-3 rounded-xl bg-slate-50 p-5 dark:bg-slate-950">
+            <div role="img" aria-label="Actividad de agentes durante los últimos siete días, representada con datos de ejemplo" class="mt-6 flex h-52 items-end gap-3 border-b border-slate-200 bg-slate-50 px-5 pt-4 dark:border-slate-800 dark:bg-slate-950">
               <div class="h-24 flex-1 rounded-t-lg bg-indigo-300 dark:bg-indigo-800"></div>
               <div class="h-36 flex-1 rounded-t-lg bg-indigo-400 dark:bg-indigo-700"></div>
               <div class="h-28 flex-1 rounded-t-lg bg-indigo-300 dark:bg-indigo-800"></div>
               <div class="h-48 flex-1 rounded-t-lg bg-indigo-500 dark:bg-indigo-600"></div>
               <div class="h-40 flex-1 rounded-t-lg bg-indigo-400 dark:bg-indigo-700"></div>
-              <div class="h-52 flex-1 rounded-t-lg bg-indigo-600 dark:bg-indigo-500"></div>
+              <div class="h-44 flex-1 rounded-t-lg bg-indigo-600 dark:bg-indigo-500"></div>
               <div class="h-44 flex-1 rounded-t-lg bg-indigo-500 dark:bg-indigo-600"></div>
+            </div>
+            <div class="mt-2 flex gap-3 px-5 text-center text-xs text-slate-500 dark:text-slate-400">
+              <span data-day class="flex-1">Lun</span>
+              <span data-day class="flex-1">Mar</span>
+              <span data-day class="flex-1">Mié</span>
+              <span data-day class="flex-1">Jue</span>
+              <span data-day class="flex-1">Vie</span>
+              <span data-day class="flex-1">Sáb</span>
+              <span data-day class="flex-1">Dom</span>
             </div>
           </article>
         </section>
@@ -181,14 +213,14 @@
         <!-- USERS -->
         <section id="users" class="app-section hidden space-y-6">
           <div>
-            <h2 class="text-2xl font-bold">Gestión de usuarios</h2>
+            <h2 class="text-xl font-semibold">Gestión de usuarios</h2>
             <p class="mt-1 text-slate-500 dark:text-slate-400">
               Usuarios registrados en la plataforma.
             </p>
           </div>
 
-          <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <table class="min-w-full text-sm">
+          <div class="overflow-x-auto rounded-lg border border-slate-200 bg-[#FFFDF8] dark:border-slate-800 dark:bg-slate-900">
+            <table class="min-w-[760px] w-full text-sm [&_tbody_tr:hover]:bg-slate-50 dark:[&_tbody_tr:hover]:bg-slate-800">
               <thead class="bg-slate-50 text-left text-slate-500 dark:bg-slate-800 dark:text-slate-400">
                 <tr>
                   <th class="px-5 py-4">Nombre</th>
@@ -210,7 +242,7 @@
                   </td>
                   <td class="relative px-5 py-4 text-right">
                     <button class="dropdown-button rounded-lg px-3 py-1 hover:bg-slate-100 dark:hover:bg-slate-800">⋮</button>
-                    <div class="dropdown-menu absolute right-5 top-12 z-20 hidden w-36 rounded-xl border border-slate-200 bg-white p-1 text-left shadow-lg dark:border-slate-700 dark:bg-slate-800">
+                    <div class="dropdown-menu absolute right-5 top-12 z-20 hidden w-36 rounded-md border border-slate-200 bg-[#FFFDF8] p-1 text-left shadow-lg dark:border-slate-700 dark:bg-slate-800">
                       <button
                         class="detail-button w-full rounded-lg px-3 py-2 text-left hover:bg-slate-100 dark:hover:bg-slate-700"
                         data-title="Laura Sánchez"
@@ -234,7 +266,7 @@
                   </td>
                   <td class="relative px-5 py-4 text-right">
                     <button class="dropdown-button rounded-lg px-3 py-1 hover:bg-slate-100 dark:hover:bg-slate-800">⋮</button>
-                    <div class="dropdown-menu absolute right-5 top-12 z-20 hidden w-36 rounded-xl border border-slate-200 bg-white p-1 text-left shadow-lg dark:border-slate-700 dark:bg-slate-800">
+                    <div class="dropdown-menu absolute right-5 top-12 z-20 hidden w-36 rounded-md border border-slate-200 bg-[#FFFDF8] p-1 text-left shadow-lg dark:border-slate-700 dark:bg-slate-800">
                       <button
                         class="detail-button w-full rounded-lg px-3 py-2 text-left hover:bg-slate-100 dark:hover:bg-slate-700"
                         data-title="Daniel Ruiz"
@@ -256,7 +288,7 @@
                   </td>
                   <td class="relative px-5 py-4 text-right">
                     <button class="dropdown-button rounded-lg px-3 py-1">⋮</button>
-                    <div class="dropdown-menu absolute right-5 top-12 z-20 hidden w-36 rounded-xl border bg-white p-1 text-left shadow-lg dark:border-slate-700 dark:bg-slate-800">
+                    <div class="dropdown-menu absolute right-5 top-12 z-20 hidden w-36 rounded-md border bg-[#FFFDF8] p-1 text-left shadow-lg dark:border-slate-700 dark:bg-slate-800">
                       <button
                         class="detail-button w-full rounded-lg px-3 py-2 text-left"
                         data-title="Marta López"
@@ -278,7 +310,7 @@
                   </td>
                   <td class="relative px-5 py-4 text-right">
                     <button class="dropdown-button rounded-lg px-3 py-1">⋮</button>
-                    <div class="dropdown-menu absolute right-5 top-12 z-20 hidden w-36 rounded-xl border bg-white p-1 text-left shadow-lg dark:border-slate-700 dark:bg-slate-800">
+                    <div class="dropdown-menu absolute right-5 top-12 z-20 hidden w-36 rounded-md border bg-[#FFFDF8] p-1 text-left shadow-lg dark:border-slate-700 dark:bg-slate-800">
                       <button
                         class="detail-button w-full rounded-lg px-3 py-2 text-left"
                         data-title="Carlos Vega"
@@ -300,7 +332,7 @@
                   </td>
                   <td class="relative px-5 py-4 text-right">
                     <button class="dropdown-button rounded-lg px-3 py-1">⋮</button>
-                    <div class="dropdown-menu absolute right-5 top-12 z-20 hidden w-36 rounded-xl border bg-white p-1 text-left shadow-lg dark:border-slate-700 dark:bg-slate-800">
+                    <div class="dropdown-menu absolute right-5 top-12 z-20 hidden w-36 rounded-md border bg-[#FFFDF8] p-1 text-left shadow-lg dark:border-slate-700 dark:bg-slate-800">
                       <button
                         class="detail-button w-full rounded-lg px-3 py-2 text-left"
                         data-title="Andrea Martín"
@@ -321,7 +353,7 @@
         <!-- AGENTS -->
         <section id="agents" class="app-section hidden space-y-6">
           <div>
-            <h2 class="text-2xl font-bold">Gestión de agentes</h2>
+            <h2 class="text-xl font-semibold">Gestión de agentes</h2>
             <p class="mt-1 text-slate-500 dark:text-slate-400">
               Agentes IA registrados en AgentHub.
             </p>
@@ -329,24 +361,24 @@
 
           <div class="grid gap-4">
 
-            <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <article class="rounded-lg border border-slate-200 bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900">
               <div class="flex flex-col justify-between gap-4 md:flex-row md:items-center">
                 <div>
                   <div class="flex items-center gap-3">
-                    <h3 class="text-lg font-semibold">Atlas</h3>
+                    <span class="flex h-10 w-10 items-center justify-center rounded-md bg-indigo-50 font-semibold text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">A</span><h3 class="text-lg font-semibold">Atlas</h3>
                     <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">Activo</span>
                   </div>
-                  <p class="mt-1 text-sm text-slate-500">Propietario: Acme Corp</p>
+                  <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Propietario: Acme Corp</p>
                 </div>
 
                 <div class="flex gap-2">
-                  <button class="skills-toggle rounded-xl border border-slate-200 px-4 py-2 text-sm dark:border-slate-700">
+                  <button class="skills-toggle rounded-md border border-slate-200 px-4 py-2 text-sm dark:border-slate-700">
                     Ver skills
                   </button>
 
                   <div class="relative">
-                    <button class="dropdown-button rounded-xl border border-slate-200 px-4 py-2 dark:border-slate-700">⋮</button>
-                    <div class="dropdown-menu absolute right-0 top-12 z-20 hidden w-40 rounded-xl border bg-white p-1 shadow-lg dark:border-slate-700 dark:bg-slate-800">
+                    <button class="dropdown-button rounded-md border border-slate-200 px-4 py-2 dark:border-slate-700">⋮</button>
+                    <div class="dropdown-menu absolute right-0 top-12 z-20 hidden w-40 rounded-md border bg-[#FFFDF8] p-1 shadow-lg dark:border-slate-700 dark:bg-slate-800">
                       <button
                         class="configure-button w-full rounded-lg px-3 py-2 text-left"
                         data-agent="Atlas"
@@ -360,30 +392,30 @@
                 </div>
               </div>
 
-              <div class="skills-panel mt-4 hidden overflow-hidden rounded-xl bg-slate-50 p-4 dark:bg-slate-950">
-                <div class="flex flex-wrap gap-2">
+              <div class="skills-panel max-h-0 overflow-hidden opacity-0 transition-all duration-300 motion-reduce:transition-none">
+                <div class="flex min-h-0 flex-wrap gap-2 overflow-hidden pt-4">
                   <span class="rounded-full bg-indigo-100 px-3 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Navegación web</span>
                   <span class="rounded-full bg-indigo-100 px-3 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Lectura de documentos</span>
                 </div>
               </div>
             </article>
 
-            <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <article class="rounded-lg border border-slate-200 bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900">
               <div class="flex flex-col justify-between gap-4 md:flex-row md:items-center">
                 <div>
                   <div class="flex items-center gap-3">
-                    <h3 class="text-lg font-semibold">Nova</h3>
+                    <span class="flex h-10 w-10 items-center justify-center rounded-md bg-indigo-50 font-semibold text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">N</span><h3 class="text-lg font-semibold">Nova</h3>
                     <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">Activo</span>
                   </div>
-                  <p class="mt-1 text-sm text-slate-500">Propietario: Northstar Labs</p>
+                  <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Propietario: Northstar Labs</p>
                 </div>
 
                 <div class="flex gap-2">
-                  <button class="skills-toggle rounded-xl border border-slate-200 px-4 py-2 text-sm dark:border-slate-700">Ver skills</button>
+                  <button class="skills-toggle rounded-md border border-slate-200 px-4 py-2 text-sm dark:border-slate-700">Ver skills</button>
 
                   <div class="relative">
-                    <button class="dropdown-button rounded-xl border border-slate-200 px-4 py-2 dark:border-slate-700">⋮</button>
-                    <div class="dropdown-menu absolute right-0 top-12 z-20 hidden w-40 rounded-xl border bg-white p-1 shadow-lg dark:border-slate-700 dark:bg-slate-800">
+                    <button class="dropdown-button rounded-md border border-slate-200 px-4 py-2 dark:border-slate-700">⋮</button>
+                    <div class="dropdown-menu absolute right-0 top-12 z-20 hidden w-40 rounded-md border bg-[#FFFDF8] p-1 shadow-lg dark:border-slate-700 dark:bg-slate-800">
                       <button
                         class="configure-button w-full rounded-lg px-3 py-2 text-left"
                         data-agent="Nova"
@@ -397,51 +429,53 @@
                 </div>
               </div>
 
-              <div class="skills-panel mt-4 hidden rounded-xl bg-slate-50 p-4 dark:bg-slate-950">
-                <div class="flex flex-wrap gap-2">
+              <div class="skills-panel max-h-0 overflow-hidden opacity-0 transition-all duration-300 motion-reduce:transition-none">
+                <div class="flex min-h-0 flex-wrap gap-2 overflow-hidden pt-4">
                   <span class="rounded-full bg-indigo-100 px-3 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Gestión de calendario</span>
                   <span class="rounded-full bg-indigo-100 px-3 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Análisis de datos</span>
                 </div>
               </div>
             </article>
 
-            <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <article class="rounded-lg border border-slate-200 bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900">
               <div class="flex flex-col justify-between gap-4 md:flex-row md:items-center">
                 <div>
                   <div class="flex items-center gap-3">
-                    <h3 class="text-lg font-semibold">Orion</h3>
+                    <span class="flex h-10 w-10 items-center justify-center rounded-md bg-indigo-50 font-semibold text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">O</span><h3 class="text-lg font-semibold">Orion</h3>
                     <span class="rounded-full bg-rose-100 px-3 py-1 text-xs text-rose-700 dark:bg-rose-950 dark:text-rose-300">Fallando</span>
                   </div>
-                  <p class="mt-1 text-sm text-slate-500">Propietario: BluePeak</p>
+                  <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Propietario: BluePeak</p>
                 </div>
 
-                <button class="skills-toggle rounded-xl border border-slate-200 px-4 py-2 text-sm dark:border-slate-700">
-                  Ver skills
-                </button>
+                <div class="flex gap-2">
+                  <button class="skills-toggle rounded-md border border-slate-200 px-4 py-2 text-sm dark:border-slate-700">Ver skills</button>
+                  <button class="configure-button rounded-md border border-slate-200 px-4 py-2 text-sm dark:border-slate-700" data-agent="Orion" data-prompt="Eres Orion, un agente especializado en investigar fuentes web para BluePeak.">Configurar</button>
+                </div>
               </div>
 
-              <div class="skills-panel mt-4 hidden rounded-xl bg-slate-50 p-4 dark:bg-slate-950">
-                <span class="rounded-full bg-indigo-100 px-3 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Navegación web</span>
+              <div class="skills-panel max-h-0 overflow-hidden opacity-0 transition-all duration-300 motion-reduce:transition-none">
+                <div class="min-h-0 overflow-hidden pt-4"><span class="rounded-full bg-indigo-100 px-3 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Navegación web</span></div>
               </div>
             </article>
 
-            <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <article class="rounded-lg border border-slate-200 bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900">
               <div class="flex flex-col justify-between gap-4 md:flex-row md:items-center">
                 <div>
                   <div class="flex items-center gap-3">
-                    <h3 class="text-lg font-semibold">Luna</h3>
+                    <span class="flex h-10 w-10 items-center justify-center rounded-md bg-indigo-50 font-semibold text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">L</span><h3 class="text-lg font-semibold">Luna</h3>
                     <span class="rounded-full bg-slate-200 px-3 py-1 text-xs text-slate-700 dark:bg-slate-700 dark:text-slate-200">Inactivo</span>
                   </div>
-                  <p class="mt-1 text-sm text-slate-500">Propietario: Vertex Solutions</p>
+                  <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Propietario: Vertex Solutions</p>
                 </div>
 
-                <button class="skills-toggle rounded-xl border border-slate-200 px-4 py-2 text-sm dark:border-slate-700">
-                  Ver skills
-                </button>
+                <div class="flex gap-2">
+                  <button class="skills-toggle rounded-md border border-slate-200 px-4 py-2 text-sm dark:border-slate-700">Ver skills</button>
+                  <button class="configure-button rounded-md border border-slate-200 px-4 py-2 text-sm dark:border-slate-700" data-agent="Luna" data-prompt="Eres Luna, una agente especializada en leer documentos para Vertex Solutions.">Configurar</button>
+                </div>
               </div>
 
-              <div class="skills-panel mt-4 hidden rounded-xl bg-slate-50 p-4 dark:bg-slate-950">
-                <span class="rounded-full bg-indigo-100 px-3 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Lectura de documentos</span>
+              <div class="skills-panel max-h-0 overflow-hidden opacity-0 transition-all duration-300 motion-reduce:transition-none">
+                <div class="min-h-0 overflow-hidden pt-4"><span class="rounded-full bg-indigo-100 px-3 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Lectura de documentos</span></div>
               </div>
             </article>
 
@@ -451,45 +485,33 @@
         <!-- SKILLS -->
         <section id="skills" class="app-section hidden space-y-6">
           <div>
-            <h2 class="text-2xl font-bold">Skills</h2>
+            <h2 class="text-xl font-semibold">Skills</h2>
             <p class="mt-1 text-slate-500 dark:text-slate-400">
               Capacidades disponibles para ampliar lo que puede hacer cada agente.
             </p>
           </div>
 
-          <div class="rounded-2xl border border-indigo-200 bg-indigo-50 p-5 text-sm text-indigo-900 dark:border-indigo-900 dark:bg-indigo-950 dark:text-indigo-200">
+          <div class="border-l-2 border-indigo-600 bg-indigo-50 px-5 py-4 text-sm text-indigo-900 dark:border-indigo-300 dark:bg-indigo-950 dark:text-indigo-200">
             Una <strong>skill</strong> es una capacidad específica que puede habilitarse en un agente, como navegar por la web, leer documentos, analizar datos o gestionar calendarios.
           </div>
 
           <div class="grid gap-4 md:grid-cols-2">
 
-            <article class="rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-              <div class="flex justify-between">
-                <div>
-                  <h3 class="font-semibold">Navegación web</h3>
-                  <p class="mt-2 text-sm text-slate-500">Permite investigar información en páginas web.</p>
-                  <p class="mt-3 text-sm font-medium">32 agentes habilitados</p>
-                </div>
-                <button class="detail-button h-fit rounded-lg px-3 py-1" data-title="Navegación web" data-content="Tipo: Skill|Agentes habilitados: 32|Estado: Disponible">⋮</button>
-              </div>
+            <article class="rounded-lg border border-slate-200 bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex items-start justify-between gap-3"><svg class="h-5 w-5 text-indigo-600 dark:text-indigo-300" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><use href="#icon-skill"/></svg><button class="detail-button min-h-11 rounded-md px-3 text-sm text-indigo-700 hover:bg-indigo-50 dark:text-indigo-300 dark:hover:bg-slate-800" data-title="Navegación web" data-content="Tipo: Skill|Agentes habilitados: Atlas y Orion|Estado: Disponible">Ver detalle</button></div>
+              <h3 class="mt-2 font-semibold">Navegación web</h3><p class="mt-2 text-sm text-slate-500 dark:text-slate-400">Permite investigar información en páginas web.</p><p class="mt-4 text-sm font-medium">2 agentes habilitados</p>
             </article>
-
-            <article class="rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-              <h3 class="font-semibold">Lectura de documentos</h3>
-              <p class="mt-2 text-sm text-slate-500">Extrae y analiza información de documentos.</p>
-              <p class="mt-3 text-sm font-medium">47 agentes habilitados</p>
+            <article class="rounded-lg border border-slate-200 bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex items-start justify-between gap-3"><svg class="h-5 w-5 text-indigo-600 dark:text-indigo-300" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><use href="#icon-file"/></svg><button class="detail-button min-h-11 rounded-md px-3 text-sm text-indigo-700 hover:bg-indigo-50 dark:text-indigo-300 dark:hover:bg-slate-800" data-title="Lectura de documentos" data-content="Tipo: Skill|Agentes habilitados: Atlas y Luna|Estado: Disponible">Ver detalle</button></div>
+              <h3 class="mt-2 font-semibold">Lectura de documentos</h3><p class="mt-2 text-sm text-slate-500 dark:text-slate-400">Extrae y analiza información de documentos.</p><p class="mt-4 text-sm font-medium">2 agentes habilitados</p>
             </article>
-
-            <article class="rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-              <h3 class="font-semibold">Gestión de calendario</h3>
-              <p class="mt-2 text-sm text-slate-500">Permite consultar y organizar eventos.</p>
-              <p class="mt-3 text-sm font-medium">21 agentes habilitados</p>
+            <article class="rounded-lg border border-slate-200 bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex items-start justify-between gap-3"><svg class="h-5 w-5 text-indigo-600 dark:text-indigo-300" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><use href="#icon-grid"/></svg><button class="detail-button min-h-11 rounded-md px-3 text-sm text-indigo-700 hover:bg-indigo-50 dark:text-indigo-300 dark:hover:bg-slate-800" data-title="Gestión de calendario" data-content="Tipo: Skill|Agente habilitado: Nova|Estado: Disponible">Ver detalle</button></div>
+              <h3 class="mt-2 font-semibold">Gestión de calendario</h3><p class="mt-2 text-sm text-slate-500 dark:text-slate-400">Permite consultar y organizar eventos.</p><p class="mt-4 text-sm font-medium">1 agente habilitado</p>
             </article>
-
-            <article class="rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-              <h3 class="font-semibold">Análisis de datos</h3>
-              <p class="mt-2 text-sm text-slate-500">Procesa métricas y genera conclusiones.</p>
-              <p class="mt-3 text-sm font-medium">38 agentes habilitados</p>
+            <article class="rounded-lg border border-slate-200 bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900">
+              <div class="flex items-start justify-between gap-3"><svg class="h-5 w-5 text-indigo-600 dark:text-indigo-300" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><use href="#icon-grid"/></svg><button class="detail-button min-h-11 rounded-md px-3 text-sm text-indigo-700 hover:bg-indigo-50 dark:text-indigo-300 dark:hover:bg-slate-800" data-title="Análisis de datos" data-content="Tipo: Skill|Agente habilitado: Nova|Estado: Disponible">Ver detalle</button></div>
+              <h3 class="mt-2 font-semibold">Análisis de datos</h3><p class="mt-2 text-sm text-slate-500 dark:text-slate-400">Procesa métricas y genera conclusiones.</p><p class="mt-4 text-sm font-medium">1 agente habilitado</p>
             </article>
 
           </div>
@@ -498,12 +520,12 @@
         <!-- CONTRACTS -->
         <section id="contracts" class="app-section hidden space-y-6">
           <div>
-            <h2 class="text-2xl font-bold">Contrataciones de agentes</h2>
-            <p class="mt-1 text-slate-500">Contratos activos y finalizados.</p>
+            <h2 class="text-xl font-semibold">Contrataciones de agentes</h2>
+            <p class="mt-1 text-slate-500 dark:text-slate-400">Contratos activos y finalizados.</p>
           </div>
 
-          <div class="overflow-x-auto rounded-2xl border bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <table class="min-w-full text-sm">
+          <div class="overflow-x-auto rounded-lg border bg-[#FFFDF8] dark:border-slate-800 dark:bg-slate-900">
+            <table class="min-w-[900px] w-full text-sm [&_tbody_tr:hover]:bg-slate-50 dark:[&_tbody_tr:hover]:bg-slate-800">
               <thead class="bg-slate-50 text-left dark:bg-slate-800">
                 <tr>
                   <th class="px-5 py-4">Cliente</th>
@@ -520,7 +542,7 @@
                 <tr>
                   <td class="px-5 py-4">Acme Corp</td>
                   <td class="px-5 py-4">Atlas</td>
-                  <td class="px-5 py-4">Web, Documentos</td>
+                  <td class="px-5 py-4"><span class="rounded bg-indigo-50 px-2 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Web</span> <span class="rounded bg-indigo-50 px-2 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Documentos</span></td>
                   <td class="px-5 py-4">01/10/2026</td>
                   <td class="px-5 py-4">31/12/2026</td>
                   <td class="px-5 py-4 font-medium">1.890 €</td>
@@ -538,7 +560,7 @@
                 <tr>
                   <td class="px-5 py-4">Northstar Labs</td>
                   <td class="px-5 py-4">Nova</td>
-                  <td class="px-5 py-4">Calendario, Datos</td>
+                  <td class="px-5 py-4"><span class="rounded bg-indigo-50 px-2 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Calendario</span> <span class="rounded bg-indigo-50 px-2 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">Datos</span></td>
                   <td class="px-5 py-4">15/09/2026</td>
                   <td class="px-5 py-4">15/12/2026</td>
                   <td class="px-5 py-4 font-medium">2.150 €</td>
@@ -596,15 +618,15 @@
         <!-- ERRORS -->
         <section id="errors" class="app-section hidden space-y-6">
           <div>
-            <h2 class="text-2xl font-bold">Log de errores</h2>
-            <p class="mt-1 text-slate-500">
+            <h2 class="text-xl font-semibold">Log de errores</h2>
+            <p class="mt-1 text-slate-500 dark:text-slate-400">
               Incidencias registradas durante la ejecución de agentes.
             </p>
           </div>
 
           <div class="space-y-3">
 
-            <article class="error-item flex flex-col justify-between gap-4 rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900 md:flex-row md:items-center">
+            <article class="error-item flex flex-col justify-between gap-4 rounded-lg border bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900 md:flex-row md:items-center">
               <div>
                 <div class="flex flex-wrap items-center gap-3">
                   <strong>Orion</strong>
@@ -614,62 +636,43 @@
                 <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">
                   Error de autenticación al acceder a una fuente externa.
                 </p>
+                <p class="error-status mt-2 text-xs font-medium text-slate-500 dark:text-slate-400">Sin resolver</p>
               </div>
 
               <div class="flex gap-2">
                 <button
-                  class="detail-button rounded-xl border px-4 py-2 text-sm dark:border-slate-700"
+                  class="detail-button rounded-md border px-4 py-2 text-sm dark:border-slate-700"
                   data-title="Error de Orion"
                   data-content="Tipo: AuthenticationError|Código: AUTH-401|Traza: ExternalProvider -> authenticate() -> token rejected|Estado: Sin resolver"
                 >
                   Ver detalle
                 </button>
 
-                <button class="resolve-button rounded-xl bg-emerald-600 px-4 py-2 text-sm text-white">
+                <button class="resolve-button rounded-md bg-emerald-600 px-4 py-2 text-sm text-white">
                   Marcar como resuelto
                 </button>
               </div>
             </article>
 
-            <article class="error-item rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-              <div class="flex flex-wrap items-center gap-3">
-                <strong>Atlas</strong>
-                <span class="rounded-full bg-amber-100 px-3 py-1 text-xs text-amber-700">Warning</span>
-                <span class="text-xs text-slate-400">25/11/2026 08:12</span>
-              </div>
-              <p class="mt-2 text-sm">Tiempo de respuesta superior al esperado.</p>
+            <article class="error-item flex flex-col justify-between gap-4 rounded-lg border border-slate-200 bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900 md:flex-row md:items-center">
+              <div><div class="flex flex-wrap items-center gap-3"><strong>Atlas</strong><span class="rounded-full bg-amber-100 px-3 py-1 text-xs text-amber-700 dark:bg-amber-950 dark:text-amber-300">Warning</span><span class="text-xs text-slate-500 dark:text-slate-400">25/11/2026 08:12</span></div><p class="mt-2 text-sm">Tiempo de respuesta superior al esperado.</p><p class="error-status mt-2 text-xs font-medium text-slate-500 dark:text-slate-400">Sin resolver</p></div>
+              <div class="flex flex-wrap gap-2"><button class="detail-button min-h-11 rounded-md border border-slate-200 px-4 text-sm dark:border-slate-700" data-title="Incidencia de Atlas" data-content="Tipo: Warning|Descripción: Tiempo de respuesta superior al esperado">Ver detalle</button><button class="resolve-button min-h-11 rounded-md bg-emerald-600 px-4 text-sm text-white">Marcar como resuelto</button></div>
             </article>
-
-            <article class="error-item rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-              <div class="flex gap-3">
-                <strong>Nova</strong>
-                <span class="rounded-full bg-rose-100 px-3 py-1 text-xs text-rose-700">Error</span>
-              </div>
-              <p class="mt-2 text-sm">No se pudo sincronizar un calendario.</p>
+            <article class="error-item flex flex-col justify-between gap-4 rounded-lg border border-slate-200 bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900 md:flex-row md:items-center">
+              <div><div class="flex flex-wrap items-center gap-3"><strong>Nova</strong><span class="rounded-full bg-rose-100 px-3 py-1 text-xs text-rose-700 dark:bg-rose-950 dark:text-rose-300">Error</span><span class="text-xs text-slate-500 dark:text-slate-400">24/11/2026 16:40</span></div><p class="mt-2 text-sm">No se pudo sincronizar un calendario.</p><p class="error-status mt-2 text-xs font-medium text-slate-500 dark:text-slate-400">Sin resolver</p></div>
+              <div class="flex flex-wrap gap-2"><button class="detail-button min-h-11 rounded-md border border-slate-200 px-4 text-sm dark:border-slate-700" data-title="Incidencia de Nova" data-content="Tipo: Error|Descripción: No se pudo sincronizar un calendario">Ver detalle</button><button class="resolve-button min-h-11 rounded-md bg-emerald-600 px-4 text-sm text-white">Marcar como resuelto</button></div>
             </article>
-
-            <article class="error-item rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-              <div class="flex gap-3">
-                <strong>Atlas</strong>
-                <span class="rounded-full bg-amber-100 px-3 py-1 text-xs text-amber-700">Warning</span>
-              </div>
-              <p class="mt-2 text-sm">Documento parcialmente ilegible.</p>
+            <article class="error-item flex flex-col justify-between gap-4 rounded-lg border border-slate-200 bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900 md:flex-row md:items-center">
+              <div><div class="flex flex-wrap items-center gap-3"><strong>Atlas</strong><span class="rounded-full bg-amber-100 px-3 py-1 text-xs text-amber-700 dark:bg-amber-950 dark:text-amber-300">Warning</span><span class="text-xs text-slate-500 dark:text-slate-400">24/11/2026 11:15</span></div><p class="mt-2 text-sm">Documento parcialmente ilegible.</p><p class="error-status mt-2 text-xs font-medium text-slate-500 dark:text-slate-400">Sin resolver</p></div>
+              <div class="flex flex-wrap gap-2"><button class="detail-button min-h-11 rounded-md border border-slate-200 px-4 text-sm dark:border-slate-700" data-title="Incidencia de Atlas" data-content="Tipo: Warning|Descripción: Documento parcialmente ilegible">Ver detalle</button><button class="resolve-button min-h-11 rounded-md bg-emerald-600 px-4 text-sm text-white">Marcar como resuelto</button></div>
             </article>
-
-            <article class="error-item rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-              <div class="flex gap-3">
-                <strong>Luna</strong>
-                <span class="rounded-full bg-slate-200 px-3 py-1 text-xs text-slate-700">Info</span>
-              </div>
-              <p class="mt-2 text-sm">Ejecución cancelada por el usuario.</p>
+            <article class="error-item flex flex-col justify-between gap-4 rounded-lg border border-slate-200 bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900 md:flex-row md:items-center">
+              <div><div class="flex flex-wrap items-center gap-3"><strong>Luna</strong><span class="rounded-full bg-slate-200 px-3 py-1 text-xs text-slate-700 dark:bg-slate-800 dark:text-slate-200">Info</span><span class="text-xs text-slate-500 dark:text-slate-400">23/11/2026 15:20</span></div><p class="mt-2 text-sm">Ejecución cancelada por el usuario.</p><p class="error-status mt-2 text-xs font-medium text-slate-500 dark:text-slate-400">Sin resolver</p></div>
+              <div class="flex flex-wrap gap-2"><button class="detail-button min-h-11 rounded-md border border-slate-200 px-4 text-sm dark:border-slate-700" data-title="Incidencia de Luna" data-content="Tipo: Info|Descripción: Ejecución cancelada por el usuario">Ver detalle</button><button class="resolve-button min-h-11 rounded-md bg-emerald-600 px-4 text-sm text-white">Marcar como resuelto</button></div>
             </article>
-
-            <article class="error-item rounded-2xl border bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-              <div class="flex gap-3">
-                <strong>Orion</strong>
-                <span class="rounded-full bg-rose-100 px-3 py-1 text-xs text-rose-700">Crítico</span>
-              </div>
-              <p class="mt-2 text-sm">Límite de peticiones externas alcanzado.</p>
+            <article class="error-item flex flex-col justify-between gap-4 rounded-lg border border-slate-200 bg-[#FFFDF8] p-5 dark:border-slate-800 dark:bg-slate-900 md:flex-row md:items-center">
+              <div><div class="flex flex-wrap items-center gap-3"><strong>Orion</strong><span class="rounded-full bg-rose-100 px-3 py-1 text-xs text-rose-700 dark:bg-rose-950 dark:text-rose-300">Crítico</span><span class="text-xs text-slate-500 dark:text-slate-400">23/11/2026 09:05</span></div><p class="mt-2 text-sm">Límite de peticiones externas alcanzado.</p><p class="error-status mt-2 text-xs font-medium text-slate-500 dark:text-slate-400">Sin resolver</p></div>
+              <div class="flex flex-wrap gap-2"><button class="detail-button min-h-11 rounded-md border border-slate-200 px-4 text-sm dark:border-slate-700" data-title="Incidencia de Orion" data-content="Tipo: Crítico|Descripción: Límite de peticiones externas alcanzado">Ver detalle</button><button class="resolve-button min-h-11 rounded-md bg-emerald-600 px-4 text-sm text-white">Marcar como resuelto</button></div>
             </article>
 
           </div>
@@ -682,18 +685,18 @@
   <!-- MODAL -->
   <div
     id="modal"
-    class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/60 p-4"
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/60 p-4 backdrop-blur-sm"
   >
     <div
       id="modalBox"
-      class="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl dark:bg-slate-900"
+      role="dialog" aria-modal="true" aria-labelledby="modalTitle" class="max-h-[calc(100dvh-2rem)] w-full max-w-lg overflow-y-auto rounded-lg border border-slate-200 bg-[#FFFDF8] p-6 shadow-xl dark:border-slate-700 dark:bg-slate-900"
     >
       <div class="flex items-start justify-between gap-4">
         <h2 id="modalTitle" class="text-xl font-bold">Detalle</h2>
 
         <button
           id="closeModal"
-          class="rounded-lg px-3 py-1 text-xl hover:bg-slate-100 dark:hover:bg-slate-800"
+          aria-label="Cerrar detalle" class="min-h-11 min-w-11 rounded-lg text-xl hover:bg-slate-100 dark:hover:bg-slate-800"
         >
           ×
         </button>
@@ -706,28 +709,28 @@
   <!-- CONFIG MODAL -->
   <div
     id="configModal"
-    class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/60 p-4"
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/60 p-4 backdrop-blur-sm"
   >
-    <div class="w-full max-w-xl rounded-2xl bg-white p-6 shadow-2xl dark:bg-slate-900">
+    <div role="dialog" aria-modal="true" aria-labelledby="configTitle" class="max-h-[calc(100dvh-2rem)] w-full max-w-xl overflow-y-auto rounded-lg border border-slate-200 bg-[#FFFDF8] p-6 shadow-xl dark:border-slate-700 dark:bg-slate-900">
       <div class="flex justify-between">
         <h2 id="configTitle" class="text-xl font-bold">Configurar agente</h2>
-        <button id="closeConfigModal" class="rounded-lg px-3 py-1 text-xl">×</button>
+        <button id="closeConfigModal" aria-label="Cerrar configuración" class="min-h-11 min-w-11 rounded-lg text-xl hover:bg-slate-100 dark:hover:bg-slate-800">×</button>
       </div>
 
-      <label class="mt-5 block text-sm font-medium">
+      <label for="agentPrompt" class="mt-5 block text-sm font-medium">
         Prompt de sistema
       </label>
 
       <textarea
         id="agentPrompt"
         rows="8"
-        class="mt-2 w-full rounded-xl border border-slate-300 bg-white p-4 text-sm dark:border-slate-700 dark:bg-slate-950"
+        class="mt-2 w-full rounded-md border border-slate-300 bg-[#FFFDF8] p-4 text-sm dark:border-slate-700 dark:bg-slate-950"
       ></textarea>
 
       <div class="mt-4 flex justify-end">
         <button
           id="savePrompt"
-          class="rounded-xl bg-indigo-600 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+          class="rounded-md bg-indigo-600 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-700"
         >
           Guardar cambios
         </button>
@@ -748,6 +751,15 @@
       contracts: "Contrataciones de agentes",
       errors: "Log de errores"
     };
+    const sectionDescriptions = {
+      dashboard: "Administración general de AgentHub",
+      users: "Usuarios registrados en la plataforma",
+      agents: "Agentes y capacidades disponibles",
+      skills: "Capacidades de los agentes",
+      contracts: "Contratos activos y finalizados",
+      errors: "Incidencias de ejecución"
+    };
+    navLinks[0].setAttribute("aria-current", "page");
 
     navLinks.forEach((button) => {
       button.addEventListener("click", () => {
@@ -763,22 +775,27 @@
           nav.classList.remove(
             "bg-indigo-50",
             "text-indigo-700",
+            "border-indigo-600",
             "dark:bg-indigo-950",
             "dark:text-indigo-300"
           );
 
           nav.classList.add(
+            "border-transparent",
             "text-slate-600",
             "dark:text-slate-300"
           );
+          nav.removeAttribute("aria-current");
         });
 
         button.classList.remove(
+          "border-transparent",
           "text-slate-600",
           "dark:text-slate-300"
         );
 
         button.classList.add(
+          "border-indigo-600",
           "bg-indigo-50",
           "text-indigo-700",
           "dark:bg-indigo-950",
@@ -786,6 +803,8 @@
         );
 
         pageTitle.textContent = sectionTitles[sectionId];
+        document.getElementById("pageDescription").textContent = sectionDescriptions[sectionId];
+        button.setAttribute("aria-current", "page");
       });
     });
 
@@ -796,7 +815,7 @@
 
     if (savedTheme === "dark") {
       document.documentElement.classList.add("dark");
-      themeToggle.textContent = "☀️ Modo claro";
+      themeToggle.textContent = "Modo claro";
     }
 
     themeToggle.addEventListener("click", () => {
@@ -810,12 +829,28 @@
       );
 
       themeToggle.textContent = darkMode
-        ? "☀️ Modo claro"
-        : "🌙 Modo oscuro";
+        ? "Modo claro"
+        : "Modo oscuro";
     });
 
     // DROPDOWNS
     document.querySelectorAll(".dropdown-button").forEach((button) => {
+      button.setAttribute("aria-label", "Abrir acciones");
+      button.setAttribute("aria-expanded", "false");
+      button.classList.add("min-h-11", "min-w-11");
+      button.nextElementSibling.querySelectorAll("button").forEach((action) => {
+        action.classList.add("hover:bg-slate-100", "dark:hover:bg-slate-700");
+        if (!action.classList.contains("detail-button") && !action.classList.contains("configure-button")) {
+          action.disabled = true;
+          action.title = "No disponible en este prototipo";
+          action.classList.add("opacity-50", "cursor-not-allowed");
+        }
+      });
+      const row = button.closest("tr");
+      if (row && row.rowIndex > 3) {
+        button.nextElementSibling.classList.remove("top-12");
+        button.nextElementSibling.classList.add("bottom-12");
+      }
       button.addEventListener("click", (event) => {
         event.stopPropagation();
 
@@ -824,30 +859,38 @@
         document.querySelectorAll(".dropdown-menu").forEach((dropdown) => {
           if (dropdown !== menu) {
             dropdown.classList.add("hidden");
+            dropdown.previousElementSibling.setAttribute("aria-expanded", "false");
           }
         });
 
         menu.classList.toggle("hidden");
+        button.setAttribute("aria-expanded", String(!menu.classList.contains("hidden")));
       });
     });
 
     document.addEventListener("click", () => {
       document.querySelectorAll(".dropdown-menu").forEach((menu) => {
         menu.classList.add("hidden");
+        menu.previousElementSibling.setAttribute("aria-expanded", "false");
       });
     });
 
     // SKILLS COLLAPSABLE
     document.querySelectorAll(".skills-toggle").forEach((button) => {
+      button.setAttribute("aria-expanded", "false");
+      button.closest("article").querySelector(".skills-panel").setAttribute("aria-hidden", "true");
       button.addEventListener("click", () => {
         const article = button.closest("article");
         const panel = article.querySelector(".skills-panel");
 
-        panel.classList.toggle("hidden");
-
-        button.textContent = panel.classList.contains("hidden")
-          ? "Ver skills"
-          : "Ocultar skills";
+        const expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        panel.setAttribute("aria-hidden", String(expanded));
+        panel.classList.toggle("max-h-0", expanded);
+        panel.classList.toggle("max-h-40", !expanded);
+        panel.classList.toggle("opacity-0", expanded);
+        panel.classList.toggle("opacity-100", !expanded);
+        button.textContent = expanded ? "Ver skills" : "Ocultar skills";
       });
     });
 
@@ -865,7 +908,7 @@
       content.split("|").forEach((line) => {
         const paragraph = document.createElement("p");
         paragraph.className =
-          "rounded-xl bg-slate-50 p-3 dark:bg-slate-800";
+          "rounded-md bg-slate-50 p-3 dark:bg-slate-800";
         paragraph.textContent = line;
         modalContent.appendChild(paragraph);
       });
@@ -880,8 +923,14 @@
     }
 
     document.querySelectorAll(".detail-button").forEach((button) => {
+      if (button.textContent.trim() === "⋮") button.setAttribute("aria-label", "Ver detalle");
       button.addEventListener("click", (event) => {
         event.stopPropagation();
+
+        document.querySelectorAll(".dropdown-menu").forEach((menu) => {
+          menu.classList.add("hidden");
+          menu.previousElementSibling.setAttribute("aria-expanded", "false");
+        });
 
         openDetailModal(
           button.dataset.title || "Detalle",
@@ -904,12 +953,19 @@
     const agentPrompt = document.getElementById("agentPrompt");
     const closeConfigModal = document.getElementById("closeConfigModal");
     const savePrompt = document.getElementById("savePrompt");
+    let activeConfigureButton = null;
 
     document.querySelectorAll(".configure-button").forEach((button) => {
       button.addEventListener("click", (event) => {
         event.stopPropagation();
 
+        document.querySelectorAll(".dropdown-menu").forEach((menu) => {
+          menu.classList.add("hidden");
+          menu.previousElementSibling.setAttribute("aria-expanded", "false");
+        });
+
         configTitle.textContent = `Configurar ${button.dataset.agent}`;
+        activeConfigureButton = button;
         agentPrompt.value = button.dataset.prompt;
 
         configModal.classList.remove("hidden");
@@ -931,6 +987,7 @@
     });
 
     savePrompt.addEventListener("click", () => {
+      if (activeConfigureButton) activeConfigureButton.dataset.prompt = agentPrompt.value;
       hideConfigModal();
     });
 
@@ -938,6 +995,13 @@
     document.querySelectorAll(".resolve-button").forEach((button) => {
       button.addEventListener("click", () => {
         button.textContent = "✓ Resuelto";
+        const item = button.closest(".error-item");
+        item.querySelector(".error-status").textContent = "Resuelto";
+        item.querySelector(".error-status").classList.add("text-emerald-700", "dark:text-emerald-300");
+        const detail = item.querySelector(".detail-button");
+        detail.dataset.content = detail.dataset.content.includes("Estado: Sin resolver")
+          ? detail.dataset.content.replace("Estado: Sin resolver", "Estado: Resuelto")
+          : `${detail.dataset.content}|Estado: Resuelto`;
 
         button.classList.remove("bg-emerald-600");
 
